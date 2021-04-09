@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-seamfix-dev-44032-authRole",
+      "UnauthRoleArn": "arn:aws:iam::725569385543:role/amplify-seamfix-dev-44032-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::725569385543:role/amplify-seamfix-dev-44032-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-seamfix-dev-44032-deployment",
+      "UnauthRoleName": "amplify-seamfix-dev-44032-unauthRole",
+      "StackName": "amplify-seamfix-dev-44032",
+      "StackId": "arn:aws:cloudformation:eu-west-1:725569385543:stack/amplify-seamfix-dev-44032/5ae12790-98e5-11eb-ba1c-0287c5a1bc83",
+      "AmplifyAppId": "d1gfvh42aegfw5"
+    },
+    "categories": {
+      "auth": {
+        "seamfixdcecf90d": {}
+      }
+    }
+  }
+}

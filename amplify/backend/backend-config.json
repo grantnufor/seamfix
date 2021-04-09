@@ -1,0 +1,16 @@
+{
+  "auth": {
+    "seamfixdcecf90d": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "seamfix123": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  }
+}
