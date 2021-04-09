@@ -1,5 +1,6 @@
 package com.chisomanuforom.mac.seamfix;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,6 +38,12 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.predictions.models.Gender;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,10 +76,29 @@ public class EnrollActivity extends AppCompatActivity {
     float cameraMegaPixels;
 
 
+    //for firebase auth
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enroll);
+
+
+        FirebaseApp.initializeApp(EnrollActivity.this);
+
+        //initializing Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){//if there is a user and user is signed in
+
+            Toast.makeText(EnrollActivity.this, "User signed in", Toast.LENGTH_LONG);
+        }
+        else{
+
+        }
 
 
         //initializing Amplify Auth and Storage
@@ -127,7 +153,7 @@ public class EnrollActivity extends AppCompatActivity {
                 buttonMale.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.masculinewhite), null, null, null);
                 buttonFemale.setBackgroundColor(getResources().getColor(R.color.LightGrey));
                 buttonFemale.setTextColor(getResources().getColor(R.color.Black));
-                buttonFemale.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.malered), null, null, null);
+                buttonFemale.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.femeninered), null, null, null);
 
             }
         });
@@ -150,6 +176,8 @@ public class EnrollActivity extends AppCompatActivity {
                 save();
             }
         });
+
+
 
 
 
@@ -287,6 +315,29 @@ public class EnrollActivity extends AppCompatActivity {
 
 
 
+    private void createFireBaseUserWithEmailAddress(){
+
+        mAuth.createUserWithEmailAndPassword(emailAddress, "password")//using a default password (password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("Info", "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(EnrollActivity.this, "User Created with Email Address: "+user.getEmail(), Toast.LENGTH_LONG);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("Error", "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(EnrollActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
+    }
+
 
     private void uploadFile() {
         File exampleFile = new File(getApplicationContext().getFilesDir(), "Payload");
@@ -416,6 +467,10 @@ public class EnrollActivity extends AppCompatActivity {
 
         uploadFile();//uploading to amazon s3 bucket
 
+        //******************************************************
+        //creating firebase user with email address
+        //******************************************************
+        createFireBaseUserWithEmailAddress();
 
 
         // Use the Builder class for convenient dialog construction

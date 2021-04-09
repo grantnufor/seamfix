@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "906712695576",
+    "project_id": "seamfix-4c43d",
+    "storage_bucket": "seamfix-4c43d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906712695576:android:beb3bffe3693c6a14f946d",
+        "android_client_info": {
+          "package_name": "com.chisomanuforom.mac.seamfix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "906712695576-nsmhifle0k7eal46ta3ct7crcmo87pcq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkBOV0D9Se4A-M1hoMCt1Cbq65QwyT7mk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906712695576-nsmhifle0k7eal46ta3ct7crcmo87pcq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
